@@ -1,0 +1,146 @@
+<ng-progress [color]="'#eb7f00'" [thick]="true"></ng-progress>
+<div class="main-container">
+  <div class="container">
+    <div class="row m-t-30">
+      <div class="col-md-12 text-center">
+        <h1 class="bold">
+          <i class="fa fa-credit-card"></i>&nbsp; CEC PAYMENT PORTAL
+          <br>
+          <span class="bold site-color f-s-15">Make payment for your dues.</span>
+        </h1>
+        <hr>
+      </div>
+    </div><!--end of row-->
+    <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems"
+                          [settings]="dropdownSettings"
+                          (onSelect)="onItemSelect($event)"
+                          (onDeSelect)="OnItemDeSelect($event)"
+                          (onSelectAll)="onSelectAll($event)"
+                          (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+
+
+    <div class="row m-b-30">
+      <div class="col-md-12">
+        <form #paymentForm="ngForm" (ngSubmit)="onSave(paymentForm)">
+          <div class="row">
+            <div class="col-md-6 p-15">
+              <div class="input-group">
+                <span class="input-group-addon bg-secondary-2 text-white"><i class="fa fa-user"></i></span>
+                <input type="text" #surname="ngModel" class="form-control" name="surname" id="surname"
+                       [(ngModel)]="user.surname" placeholder="Surname" required ngModel/>
+              </div>
+              <div class="validation-error" *ngIf="surname.invalid && surname.touched">This Field is Required</div>
+            </div>
+            <div class="col-md-6 p-15">
+              <div class="input-group">
+                <span class="input-group-addon bg-secondary-2 text-white"><i class="fa fa-users"></i></span>
+                <input type="text" class="form-control" [(ngModel)]="user.othername" name="othername" id="othernames"
+                       placeholder="Other Names"
+                       #othername="ngModel" required ngModel/>
+              </div>
+              <div class="validation-error" *ngIf="othername.invalid && othername.touched">This Field is Required</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 p-15">
+              <div class="input-group">
+                <span class="input-group-addon bg-secondary-2 text-white"><i class="fa fa-user-circle"></i></span>
+                <input type="text" class="form-control" id="matric" name="matric" [(ngModel)]="user.matric"
+                       placeholder="Matric Number" required
+                       #matric="ngModel" ngModel/>
+              </div>
+              <div class="validation-error" *ngIf="matric.invalid && matric.touched">This Field is Required</div>
+            </div>
+
+
+            <div class="col-md-6 p-15">
+              <div class="input-group">
+                <span class="input-group-addon bg-secondary-2 text-white"><i class="fa fa-phone-square"></i></span>
+                <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="user.phone"
+                       placeholder="Phone Number" required
+                       #phone="ngModel" ngModel/>
+              </div>
+              <div class="validation-error" *ngIf="phone.invalid && phone.touched">This Field is Required</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 p-15">
+              <div class="input-group">
+                <span class="input-group-addon bg-secondary-2 text-white"><i class="fa fa-envelope-square"></i></span>
+                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email"
+                       placeholder="Email Address" required
+                       #email="ngModel" ngModel/>
+              </div>
+              <div class="validation-error" *ngIf="email.invalid && email.touched">This Field is Required</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 p-15">
+              <select id="school" class="form-control" name="school"
+                      #school="ngModel" required ngModel [(ngModel)]="selectedSchool.id"
+                      (change)="onSelect($event.target.value)">
+                <option value="0">--Select School--</option>
+                <option *ngFor="let school of schools"
+                        value={{school.id}}>{{school.name}}
+                </option>
+              </select>
+              <div class="validation-error" *ngIf="school.invalid && school.touched">This Field is Required</div>
+            </div>
+            <div class="col-md-6 p-15">
+              <select id="department" class="form-control" [(ngModel)]="user.department" name="department"
+                      #department="ngModel" required ngModel>
+                <option value="">--Select Department--</option>
+                <option *ngFor="let department of departments"
+                        value={{department.name}}>{{department.name}}
+                </option>
+              </select>
+              <div class="validation-error" *ngIf="department.invalid && department.touched">This Field is Required
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 p-15">
+              <select id="level" class="form-control" [(ngModel)]="user.level" name="level" required
+                      #level="ngModel" ngModel>
+                <option value="">-- Select Level --</option>
+                <option value="ND YR I">ND YR I</option>
+                <option value="ND YR II">ND YR II</option>
+                <option value="ND YR III">ND YR III</option>
+                <option value="HND I Evening">HND I Evening</option>
+                <option value="HND YR I">HND YR I</option>
+                <option value="HND YR II">HND YR II</option>
+                <option value="HND YR III">HND YR III</option>
+              </select>
+              <div class="validation-error" *ngIf="level.invalid && level.touched">This Field is Required</div>
+            </div>
+            <div class="col-md-6 p-15">
+              <select id="ses" class="form-control" [(ngModel)]="user.ses" name="ses" required
+                      #ses="ngModel" ngModel>
+                <option value="">-- Select Session --</option>
+                <option value="2014/2015">2014/2015</option>
+                <option value="2015/2016">2015/2016</option>
+                <option value="2016/2017">2016/2017</option>
+                <option value="2017/2018">2017/2018</option>
+                <option value="2018/2019">2018/2019</option>
+                <option value="2019/2020">2019/2020</option>
+                <option value="2020/2021">2020/2021</option>
+              </select>
+              <div class="validation-error" *ngIf="ses.invalid && ses.touched">This Field is Required</div>
+            </div>
+            <div class="amount" *ngIf="totalAmountToPay > 0">* Total Amount - {{totalAmountToPay}}</div>
+            <div class="amount" *ngIf="totalFees > 0">* Transaction Fee - {{totalFees}}</div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 p-15">
+              <button type="submit" [disabled]="!paymentForm.form.valid || totalAmountToPay <= 0" class="btn btn-primary btn-block">
+                <img *ngIf="loading"
+                     src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                Proceed
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

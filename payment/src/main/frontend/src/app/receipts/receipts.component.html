@@ -1,0 +1,140 @@
+<ng-progress [color]="'#eb7f00'" [thick]="true"></ng-progress>
+<div *ngIf="showform" class="main-container">
+  <div class="container">
+    <div class="row m-t-30">
+      <div class="col-md-12 text-center">
+        <h1 class="bold">
+          <i class="fa fa-file-o"></i>&nbsp; RECEIPT
+          <br>
+          <span class="bold site-color f-s-15">Enter transaction ID and Print Receipt</span>
+        </h1>
+        <hr>
+      </div>
+    </div><!--end of row-->
+
+    <div class="row m-b-30">
+      <div class="col-md-12">
+        <form>
+          <div class="row">
+            <div class="col-md-12 p-15">
+              <div class="input-group">
+                <span class="input-group-addon bg-secondary-2 text-white"><i class="fa fa-unlock-alt"></i></span>
+                <input  type="text" id="transid" name="transid" required #transid="ngModel" ngModel class="form-control" [(ngModel)]="transactionId"  placeholder="Transaction ID"/>
+              </div>
+            </div>
+          </div>
+          <div class="row m-b-60">
+            <div class="col-md-12 p-15">
+              <button type="button" [disabled]="loading" (click)="print()" class="btn btn-primary btn-block"><i class="fa fa-print"></i>
+                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                &nbsp; Print</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="showdetails" class="main-container">
+  <div class="jumbotron"></div>
+  <div class="container">
+    <div class="row m-t-30">
+      <div class="col-md-12 text-center">
+        <h1 class="bold">
+          <i class="fa fa-check"></i>&nbsp; RECEIPT FOR YOUR PAYMENT
+        </h1>
+      </div>
+    </div><!--end of row-->
+
+    <div class="row m-b-30">
+      <div class="col-md-12">
+        <div class="container">
+          <table id="details" class="table table-hover">
+            <tbody>
+            <tr>
+              <th class="bold">Transaction ID :</th>
+              <td>{{user.ref}}</td>
+            </tr>
+            <tr>
+              <th class="bold">Fullname :</th>
+              <td>{{user.surname}}&nbsp;{{user.othername}}</td>
+            </tr>
+            <tr>
+              <th class="bold">Matric Number :</th>
+              <td>{{user.matric}}</td>
+            </tr>
+            <tr>
+              <th class="bold">School :</th>
+              <td>{{user.school}}</td>
+            </tr>
+            <tr>
+              <th class="bold">Department :</th>
+              <td>{{user.department}}</td>
+            </tr>
+            <tr>
+              <th class="bold">Level :</th>
+              <td>{{user.level}}</td>
+            </tr>
+            <tr>
+              <th class="bold">Session :</th>
+              <td>{{user.ses}}</td>
+            </tr>
+            <tr>
+              <th class="bold">Phone :</th>
+              <td>{{user.phone}}</td>
+            </tr>
+            <tr>
+              <th class="bold">Email :</th>
+              <td>{{user.email}}</td>
+            </tr>
+            <tr>
+              <th class="bold bg-success-2 color-white">Payment Status :</th>
+              <td class="bg-success-2 color-white">{{user.status}}</td>
+            </tr>
+            <tr>
+              <th class="bold">TOTAL DUE AMOUNT :</th>
+              <td>NGN {{user.amount}}</td>
+            </tr>
+            <tr>
+              <th class="bold">Payment Date</th>
+              <td>{{user.date}}</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <table id="pays" class="table table-hover">
+            <tbody>
+            <tr>
+              <th>PAYMENT</th>
+              <th>AMOUNT</th>
+            </tr>
+            <tr *ngFor="let payment of user.payments">
+              <td>{{payment.itemName}}</td>
+              <td class="bold">{{payment.amount}}</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <button type="button" (click)="downloadPdf()" class="btn btn-primary btn-block">
+                <img *ngIf="printShow" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                <i class="fa fa-print"></i>&nbsp;Print
+              </button>
+            </div>
+            <div class="form-group col-md-6">
+              <button type="button" (click)="back()" class="btn btn-primary btn-block">
+                <img *ngIf="backShow" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Back
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

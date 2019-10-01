@@ -1,0 +1,46 @@
+.bold{
+    font-weight: bold !important;
+}
+.italic{
+    font-style: italic !important;
+}
+.color-grey{
+    color: #9a9a9a !important;
+}
+.color-white{
+    color: #fff;
+}
+.yellow{
+    color: #e2c718;
+}
+
+.required{
+    color: #e40000;
+}
+.custom-page .head p{
+    font-size: 15px;
+    color: #666;
+}
+.error{
+    color: #bc0000 !important;
+    font-weight: bold;
+}
+.modal{
+    padding-top: 16%;
+}
+/*input{
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+select{
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+button{
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}*/

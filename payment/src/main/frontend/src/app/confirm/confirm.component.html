@@ -1,0 +1,144 @@
+<ng-progress [color]="'#eb7f00'" [thick]="true"></ng-progress>
+<div class="jumbotron"></div>
+<div *ngIf="showconfirm" class="main-container">
+  <div class="container">
+    <div class="row m-t-30">
+      <div class="col-md-12 text-center">
+        <h1 class="bold">
+          <i class="fa fa-check"></i>&nbsp; CONFIRM YOUR DETAILS
+          <br>
+          <span class="bold site-color f-s-15">Check all your details before making payment.</span>
+        </h1>
+      </div>
+    </div><!--end of row-->
+
+    <div class="row m-b-30">
+      <div class="col-md-12">
+        <div class="container">
+          <table class="table">
+            <thead>
+            <tr>
+              <th colspan="2" class="bold bg-secondary-2 color-white">PAYMENT DETAILS</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="bold">Transaction ID</td>
+              <td>{{user.ref}}</td>
+            </tr>
+            <tr>
+              <td class="bold">Fullname</td>
+              <td>{{user.surname}}&nbsp;{{user.othername}}</td>
+            </tr>
+            <tr>
+              <td class="bold">Matric Number</td>
+              <td>{{user.matric}}</td>
+            </tr>
+            <tr>
+              <td class="bold">School</td>
+              <td>{{user.school}}</td>
+            </tr>
+            <tr>
+              <td class="bold">Department</td>
+              <td>{{user.department}}</td>
+            </tr>
+            <tr>
+              <td class="bold">Level</td>
+              <td>{{user.level}}</td>
+            </tr>
+            <tr>
+              <td class="bold">Session</td>
+              <td>{{user.ses}}</td>
+            </tr>
+            <tr>
+              <td class="bold">Phone</td>
+              <td>{{user.phone}}</td>
+            </tr>
+            <tr>
+              <td class="bold">Email</td>
+              <td>{{user.email}}</td>
+            </tr>
+            <tr>
+              <td class="bold bg-danger color-white">Payment Status</td>
+              <td class="bg-danger color-white">{{user.status}}</td>
+            </tr>
+            <tr>
+              <td class="bold">Total Due Amount</td>
+              <td>NGN {{user.amount}}</td>
+            </tr>
+            <tr>
+              <td class="bold">Processing Fee</td>
+              <td>NGN {{user.fee}}</td>
+            </tr>
+            <tr>
+              <td class="bold bg-success-2 color-white">Total</td>
+              <td class="bg-success-2 color-white">NGN {{user.total}}</td>
+            </tr>
+            <br>
+            <tr>
+              <td colspan="2">
+                <rave-pay-button
+                  [text]="'Make Payment'"
+                  [className]="'btn btn-primary btn-block'"
+                  (callback)="confirmPayment($event)"
+                  (close)="cancelledPayment()"
+                  (click)="showMessage()"
+                  [key]="key"
+                  [reference]="user.ref"
+                  [amount]="user.total"
+                  [email]="user.email"
+                  [customer_firstname] ="user.othername"
+                  [customer_lastname] = "user.surname"
+                  [meta]="[{metaname : 'Matric Number',
+                  metavalue : user.matric},
+                  {metaname : 'School',
+                  metavalue : user.school},
+                  {metaname : 'Department',
+                  metavalue : user.department}]"
+                >
+                </rave-pay-button >
+                <p style="color: red;" class="text-center bold flagship-color" *ngIf="loading">Please wait...do not click again</p>
+              </td>
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="showsuccess" class="main-container">
+  <div class="container">
+    <div class="row m-t-30">
+      <div class="col-md-12 text-center">
+        <h1 class="bold">
+          <i class="fa fa fa-thumbs-o-up"></i>&nbsp; GREAT JOB !!!
+          <br>
+          <span class="bold site-color f-s-15">Your transaction was successful.</span>
+        </h1>
+      </div>
+    </div><!--end of row-->
+
+    <div class="row m-b-30">
+      <div class="col-md-12">
+        <div class="container">
+          <div class="jumbotron m-t-25">
+            <div class="text-center"><i class="fa fa-5x fa-check text-success"></i></div>
+            <h1 class="text-center">Success !!!</h1>
+            <p class="text-center">YOUR PAYMENT WAS MADE SUCCESSFUL.</p>
+            <p class="text-center bold flagship-color">TRANSACTION ID - {{user.ref}}</p>
+            <p style="color: red;" class="text-center bold flagship-color">Please copy your Transaction Id for Receipt.</p>
+            <p class="text-center"><a class="btn button-md button-theme" href="/"><i class="fa fa-money"></i> &nbsp;
+              Take me back to home page</a></p>
+            <p class="text-center site-color f-s-17">Print your receipt <a href="/receipts"><i class="fa fa-print"></i>Here</a>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

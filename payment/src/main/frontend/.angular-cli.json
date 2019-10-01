@@ -1,0 +1,82 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "frontend"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "assets/css/flexslider.min.css",
+        "assets/css/line-icons.min.css",
+        "assets/css/elegant-icons.min.css",
+        "assets/css/bootstrap.min.css",
+        "assets/css/theme-aspirin.css",
+        "assets/global_assets/css/style.css",
+        "assets/global_assets/css/unix.css",
+        "assets/form.css",
+        "styles.css",
+        "../node_modules/ngx-toastr/toastr.css",
+        "../node_modules/angular2-multiselect-dropdown/themes/default.theme.css"
+      ],
+      "scripts": [
+        "assets/js/jquery.min.js",
+        "assets/js/jquery.plugin.min.js",
+        "assets/js/bootstrap.min.js",
+        "assets/js/jquery.flexslider-min.js",
+        "assets/js/smooth-scroll.min.js",
+        "assets/js/scrollReveal.min.js",
+        "assets/js/scripts.js",
+        "assets/js/modernizr-2.6.2-respond-1.1.0.min.js",
+        "../node_modules/popper.js/dist/umd/popper.js",
+        "../node_modules/jspdf/dist/jspdf.min.js",
+        "../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}
