@@ -62,7 +62,7 @@ public class PaymentController {
         User user = paymentService.findByRef(ref);
         if (Objects.nonNull(user)) {
             PaymentVerification paymentVerification = new PaymentVerification();
-            JSONObject verify = paymentVerification.verify(user.getRef(), "FLWSECK-a66e69bd9a4b78ddd6ba8d6110830ef6-X", user.getTotal());
+            JSONObject verify = paymentVerification.verify(user.getRef(), "", user.getTotal());
             if (Objects.isNull(verify)) {
                 return user;
             }
@@ -86,7 +86,7 @@ public class PaymentController {
         if (Objects.nonNull(byRef)) {
             PaymentVerification paymentVerification = new PaymentVerification();
             //FLWSECK-c9a104353fc49e5c1ac31da422dfe1c3-X
-            JSONObject verify = paymentVerification.verify(byRef.getRef(), "FLWSECK-a66e69bd9a4b78ddd6ba8d6110830ef6-X", byRef.getTotal());
+            JSONObject verify = paymentVerification.verify(byRef.getRef(), "", byRef.getTotal());
 
             if (Objects.isNull(verify)) {
                 return null;
